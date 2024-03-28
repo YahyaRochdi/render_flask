@@ -1,0 +1,90 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #2a3f5f; /* Dark blue background, similar to the logo */
+    color: #fff; /* Keep text color white for contrast */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    height: 100vh;
+    overflow: hidden;
+    padding-top: 50px; 
+}
+#top-left-logo {
+    position: fixed; 
+    top: 10px; 
+    left: 10px; 
+    height: 90px; 
+    width: auto; 
+    z-index: 1000; 
+}
+#chat-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#chatbox {
+    width: 80%;
+    max-width: none;
+    height: 430px;
+    margin: 0 auto 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #1e2a48; /* Slightly lighter blue for the chatbox */
+    border: 1px solid #162238; /* Even lighter blue for the border */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* Adjusted for a slightly darker shadow */
+    overflow-y: auto;
+    word-wrap: break-word;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #162238; /* Dark blue for messages */
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: #007bff; /* Blue background for user messages, similar to logo color */
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: #2b3e5c; /* Lighter blue for bot messages */
+}
+
+#message-form {
+    display: flex;
+    width: 80%;
+    max-width: 600px;
+}
+
+input[type="text"]#userInput {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+    background-color: #1e2a48; /* Lighter blue for input */
+    color: #fff; /* White text for contrast */
+}
+
+button#sendButton {
+    padding: 10px 20px;
+    background-color: #4a90e2; /* Light blue for the send button, as an accent color */
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button#sendButton:hover {
+    background-color: #3980ce; /* Darker blue on hover */
+}

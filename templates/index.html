@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Project Manager Guide Logo" id="top-left-logo">
+    <div id="chat-container">
+        <div id="chatbox">
+            <!-- Chat history will go here -->
+        </div>
+        <form id="message-form" onsubmit="sendMessage(event)">
+            <input type="text" id="userInput" placeholder="Type your message here...">
+            <button type="submit">Send</button>
+        </form>
+        
+    </div>
+
+    <script>
+       function sendMessage(event) {
+    // Prevent the default form submit action
+    event.preventDefault();
+
+    var userInputField = document.getElementById('userInput');
+    var message = userInputField.value;
+    // Clear the input immediately after getting the value
+    userInputField.value = '';
+
+    // Add user's message to the chatbox immediately
+    var chatbox = document.getElementById('chatbox');
+    chatbox.innerHTML += `<div class='message user-message'><b>User:</b> ${message}</div>`;
+    // Scroll to the bottom of the chatbox to show the latest messages
+    chatbox.scrollTop = chatbox.scrollHeight;
+
+    // Then, send the message to the server and wait for the response
+    fetch('/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({message: message}),
+    })
+    .then(response => response.json())
+    .then(data => {
+    // First, replace newline characters with <br> tags for proper formatting
+    var formattedResponse = data.response.replace(/\n/g, '<br>');
+
+    // Next, replace occurrences of "**" with "<b>" tags for bold formatting
+    // This requires a slightly more complex replacement to handle opening and closing tags correctly
+    formattedResponse = formattedResponse.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+
+    // Add chatbot's formatted response to the chatbox
+    chatbox.innerHTML += `<div class='message bot-message'><b>Chatbot:</b> ${formattedResponse}</div>`;
+
+    // Scroll to the bottom of the chatbox again to show the latest messages
+    chatbox.scrollTop = chatbox.scrollHeight;
+})
+
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+    </script>
+</body>
+</html>
