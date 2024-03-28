@@ -6,7 +6,7 @@ charset-normalizer==3.3.2
 click==8.1.7
 colorama==0.4.6
 distro==1.9.0
-
+dotenv
 exceptiongroup==1.2.0
 flask==3.0.2
 gunicorn==21.2.0
